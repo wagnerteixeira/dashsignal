@@ -30,6 +30,7 @@ class DashSignal {
         var d = new Date();
 
         var dateString =  d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
+        console.log(dateString)
 
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
             auth: {
