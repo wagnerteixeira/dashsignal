@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import signalService  from '../services/dashSgnalService'
 
 import axios from 'axios'
 
@@ -7,11 +8,18 @@ import axios from 'axios'
 class Get extends Component { 
     constructor(props){
         super(props)
-        this.state = { list : []}
+        this.state = {existem : [], inativosPagam : [], inativos : [], semResposta : [], falhasGuardian : []}
+        //this.state = {list : []}
+         
     } 
     
     componentWillMount(){
-        this.getList()
+        //this.getList()
+        //console.log("signal service");
+        const state = signalService(this);     
+       // console.log(state)     
+      //  console.log(this.state)  
+         
     }
 
     getList(){
@@ -29,10 +37,12 @@ class Get extends Component {
     }   
 
     render() {
-        const { list } = this.state;
+        const { existem } = this.state;
+        console.log("this.state")
+        console.log(this.state)
         let body = []
-        if (list.length > 0) {
-            body = JSON.stringify(list);
+        if (existem.length > 0) {
+            body = JSON.stringify(existem);
         }
           
         return (

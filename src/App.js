@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CitiesList from './components/citiesList'
 //import Table from './components/table'
-//import Get from './components/get'
+import Get from './components/get'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 //import 'semantic-ui-css/semantic.min.css';
 import './components/dashSignal.css'
@@ -12,23 +12,10 @@ import './components/dashSignal.css'
  *<MuiThemeProvider>
           <CitiesList />
         </MuiThemeProvider>
-  */ 
-
-  const list =[{
-    cartorio : 'Cartorio 1',
-    cidade: 'Cidade 1',
-    estado: 'MG',    
-  }, {
-    cartorio : 'Cartorio 1',
-    cidade: 'Cidade 1',
-    estado: 'MG',
-  }]
 
 
-class App extends Component {  
-  render() {    
-    return (
-      <div className='root'>
+
+         <div className='root'>
         <MuiThemeProvider>
           <div className='tableCities'>
             <CitiesList list={list} textheader='Grid 1'/>
@@ -50,7 +37,26 @@ class App extends Component {
           </div>        
         </MuiThemeProvider>
       </div>
-      
+  */ 
+
+  const list =[{
+    cartorio : 'Cartorio 1',
+    cidade: 'Cidade 1',
+    estado: 'MG',    
+  }, {
+    cartorio : 'Cartorio 1',
+    cidade: 'Cidade 1',
+    estado: 'MG',
+  }]
+
+
+
+
+
+class App extends Component {  
+  render() {    
+    return (    
+      <Get />
     );
   }
 }
