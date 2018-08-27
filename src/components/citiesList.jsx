@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import City from './city'
 import {
     Table,
     TableBody,
@@ -10,61 +8,52 @@ import {
     TableRowColumn,
   } from 'material-ui/Table';
 
-class CitiesList extends Component {
-    constructor(props){
-        super(props)
-        this.state = { list : []}
-    } 
-    
-    componentWillMount(){
-        this.getList()
-    }
-
-    getList(){
-        axios.get(`http://computadorcasa.ddns.net:8081/apisignal/dashboard`, {
-            auth: {
-                username: '1234567890',
-                password: '0987654321'
-            }
-        }).then((res) => {            
-            this.setState({ list : res.data || [] });
-        }).catch((e) => {
-            console.log(e)
-            this.setState({ list : [] });
+class DashSignaList extends Component {    
+    renderList(){        
+        let i = 0;
+        return this.props.list.map(obj => {
+            i = i+1;
+            return (
+            <TableRow className='row_class' key={i}>
+                <TableRowColumn colSpan="2" className='row_class'>{obj.cartorio}</TableRowColumn>
+                <TableRowColumn className='row_class'>{obj.cidade}</TableRowColumn>
+                <TableRowColumn className='row_class'>{obj.estado}</TableRowColumn>
+            </TableRow>)
         });
-    }   
-    renderList(){
-        return this.state.list.map(obj => (
-            <TableRow>
-                <TableRowColumn>{obj.cartorio}</TableRowColumn>
-                <TableRowColumn>{obj.cidade}</TableRowColumn>
-                <TableRowColumn>{obj.estado}</TableRowColumn>
-            </TableRow>
-        ));
     };
-    
-    render() {
-        const { list } = this.state;
+
+    table(){
         let body = []
-        if (list.length > 0) {
+        if (this.props.list.length > 0) {
             body = this.renderList();
-        }
-          
-        return(
-        <Table >
+        }        
+        return (<Table >
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-            <TableRow>
-                <TableHeaderColumn>Cartório</TableHeaderColumn>
-                <TableHeaderColumn>Cidade</TableHeaderColumn>
-                <TableHeaderColumn>Estado</TableHeaderColumn>
-            </TableRow>
+                <TableRow className='header_class'>
+                    <TableHeaderColumn className='header_class' colSpan="3" style={{textAlign: 'center'}}>
+                        {this.props.textheader}
+                    </TableHeaderColumn>
+                </TableRow>
+                <TableRow className='header_class'>
+                    <TableHeaderColumn colSpan="2" className='header_class'>Cartório</TableHeaderColumn>
+                    <TableHeaderColumn className='header_class'>Cidade</TableHeaderColumn>
+                    <TableHeaderColumn className='header_class'>Estado</TableHeaderColumn>
+                </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
                 {body}
-            </TableBody>
-            
+            </TableBody>            
         </Table>)
+    }
+    
+    render() {            
+       let t = this.table();
+        return(
+            <div>
+                {t}
+            </div>
+        )
     }
 }
 
-export default CitiesList
+export default DashSignaList

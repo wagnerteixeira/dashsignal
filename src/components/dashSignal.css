@@ -1,0 +1,44 @@
+body {
+    width : 100%;
+    margin: 0 auto;    
+}
+
+.root {
+    width : 100%;
+    margin: 0 auto;
+}
+.tableCities {
+    width : 24.8%;
+    display: inline-block;    
+    margin: 0 auto;
+    padding-left : 1px;    
+    border: 1px solid rgb(224, 224, 224);
+}
+
+.row_class {
+    height: 20px !important;    
+}
+
+.header_class {
+    height: 30px !important;    
+}
+
+.super_header_class {
+    height: 40px !important;
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 1024px) {
+    .tableCities {
+        width : 50%;
+        display: inline-block;
+    }
+  }
+  
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+    .tableCities {
+        width : 100%;
+        display: inline-block;
+    }
+  }
