@@ -1,25 +1,39 @@
 import React, { Component } from 'react'
-import signalService  from '../services/dashSgnalService'
 
 import axios from 'axios'
+
+import DashSignal from '../services/dashSgnalService';
 
 
 
 class Get extends Component { 
     constructor(props){
         super(props)
-        this.state = {existem : [], inativosPagam : [], inativos : [], semResposta : [], falhasGuardian : []}
-        //this.state = {list : []}
-         
+        this.state = { list : []}
     } 
     
     componentWillMount(){
-        //this.getList()
-        //console.log("signal service");
-        const state = signalService(this);     
-       // console.log(state)     
-      //  console.log(this.state)  
-         
+        var d = new DashSignal()
+
+        d.getData().then((res)=> {
+            //console.log(res)
+        });
+    }
+
+    async get() {
+        const g = axios('https://localhost:44367/api/sampledata/weatherforecasts?startdateindex=1');
+        const [res] = await Promise.all([g]);
+        //console.log(res.data);
+
+        const t = axios.get('http://cri.cartsys.com.br/monitor/api/conexao/selecionarativos', {
+            auth: {
+                username: '3C83483BC1171E8E96C12219DDE7EC634B551DCB',
+                password: '287EFA6EFC66C98E9F937EAB3377A45409AEB8A5'
+            }
+        });
+
+        const [res2] = await Promise.all([t]);
+       // console.log(res2.data);
     }
 
     getList(){
@@ -37,12 +51,10 @@ class Get extends Component {
     }   
 
     render() {
-        const { existem } = this.state;
-        console.log("this.state")
-        console.log(this.state)
+        const { list } = this.state;
         let body = []
-        if (existem.length > 0) {
-            body = JSON.stringify(existem);
+        if (list.length > 0) {
+            body = JSON.stringify(list);
         }
           
         return (

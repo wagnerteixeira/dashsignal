@@ -15,9 +15,9 @@ class DashSignaList extends Component {
             i = i+1;
             return (
             <TableRow className='row_class' key={i}>
-                <TableRowColumn colSpan="2" className='row_class'>{obj.cartorio}</TableRowColumn>
-                <TableRowColumn className='row_class'>{obj.cidade}</TableRowColumn>
-                <TableRowColumn className='row_class'>{obj.estado}</TableRowColumn>
+                <TableRowColumn className='row_class'>{obj.Nome}</TableRowColumn>
+                <TableRowColumn className='row_class'>{obj.Cidade}</TableRowColumn>
+                <TableRowColumn className='row_class'>{obj.Uf}</TableRowColumn>
             </TableRow>)
         });
     };
@@ -35,7 +35,7 @@ class DashSignaList extends Component {
                     </TableHeaderColumn>
                 </TableRow>
                 <TableRow className='header_class'>
-                    <TableHeaderColumn colSpan="2" className='header_class'>Cartório</TableHeaderColumn>
+                    <TableHeaderColumn className='header_class'>Cartório</TableHeaderColumn>
                     <TableHeaderColumn className='header_class'>Cidade</TableHeaderColumn>
                     <TableHeaderColumn className='header_class'>Estado</TableHeaderColumn>
                 </TableRow>
@@ -48,7 +48,7 @@ class DashSignaList extends Component {
     
     render() {            
        let t = this.table();
-        return(
+        return(            
             <div>
                 {t}
             </div>

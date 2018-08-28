@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import CitiesList from './components/citiesList'
-//import Table from './components/table'
-import Get from './components/get'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-//import 'semantic-ui-css/semantic.min.css';
 import './components/dashSignal.css'
 
+import DashSignal from './services/dashSgnalService';
+import Alert from './components/alert'
 
 
 /*
@@ -13,9 +12,7 @@ import './components/dashSignal.css'
           <CitiesList />
         </MuiThemeProvider>
 
-
-
-         <div className='root'>
+        <div className='root'>
         <MuiThemeProvider>
           <div className='tableCities'>
             <CitiesList list={list} textheader='Grid 1'/>
@@ -39,24 +36,59 @@ import './components/dashSignal.css'
       </div>
   */ 
 
-  const list =[{
-    cartorio : 'Cartorio 1',
-    cidade: 'Cidade 1',
-    estado: 'MG',    
-  }, {
-    cartorio : 'Cartorio 1',
-    cidade: 'Cidade 1',
-    estado: 'MG',
-  }]
-
-
-
-
-
 class App extends Component {  
+  
+  constructor(props){
+    super(props);
+    this.state = {loading: true, intervalId : 0, todosClientes : [],  inativosPagam : [], inativos: [], semResposta: [], falhasGuardian: []}
+    this.dashSignal = new DashSignal()
+    this.getData = this.getData.bind(this)
+  }
+
+  getData(){
+    this.setState({...this.state, loading : true});
+    this.dashSignal.getData().then((res)=> {
+      this.setState({...res, loading : false});
+      console.log(this.state)
+    });
+  }
+
+  componentWillMount(){
+    this.getData();
+    var intervalId = setInterval(this.getData, 10000);
+    this.setState({...this.state, intervalId : intervalId});
+  }
+
+  componentWillUnmount(){
+     //use intervalId from the state to clear the interval
+    clearInterval(this.state.intervalId);
+  }
+
+  /*
+
+   <MuiThemeProvider>
+        <Alert open={this.state.loading} />        
+        <div className='root'>
+            <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
+            <CitiesList list={this.state.semResposta} textheader='Sem resposta'/>
+            <CitiesList list={this.state.inativos} textheader='Inativos'/>
+            <CitiesList list={this.state.falhasGuardian} textheader='Falhas Guardim'/>        
+        </div>
+      </MuiThemeProvider>*/
+
   render() {    
-    return (    
-      <Get />
+    return (     
+      <MuiThemeProvider> 
+        <div>        
+          <Alert open={this.state.loading} />         
+          <div className='root'>
+            <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
+            <CitiesList list={this.state.semResposta} textheader='Sem resposta'/>
+            <CitiesList list={this.state.inativos} textheader='Inativos'/>
+            <CitiesList list={this.state.falhasGuardian} textheader='Falhas Guardim'/> 
+          </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
