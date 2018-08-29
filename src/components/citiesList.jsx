@@ -81,15 +81,15 @@ class DashSignaList extends Component {
             return (
                 
                 <TableRow className='row_class' key={i}>
-                <Card>                    
-                    <TableRow>                        
-                        <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>Cartório: {obj.Nome}</TableRowColumn>                        
-                        
-                    </TableRow>
-                    <TableRow>
-                        <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>Cidade: {obj.Cidade}  - {obj.Uf}</TableRowColumn>
-                        {/*<TableRowColumn className='row_class'>Estado: {obj.Uf}</TableRowColumn>*/}
-                    </TableRow>    
+                    <Card>                    
+                        <TableRow className='row_class'>                        
+                            <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>{obj.Nome}</TableRowColumn>                        
+                            
+                        </TableRow>
+                        <TableRow className='row_class'>
+                            <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>{obj.Cidade}  - {obj.Uf}</TableRowColumn>
+                            {/*<TableRowColumn className='row_class'>Estado: {obj.Uf}</TableRowColumn>*/}
+                        </TableRow>    
                     </Card>
                 </TableRow>)
                 
@@ -107,30 +107,24 @@ class DashSignaList extends Component {
         return(
             <div>
                 <Card>
-                    <CardHeader>
-
-                    </CardHeader>
-                
-                  <Table>
-                  <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                  <TableRow className='header_class'>
-                    <TableHeaderColumn className='header_class' colSpan="3" style={{ textAlign: 'center' }}>
-                        {this.props.textheader}
-                    </TableHeaderColumn>
-                </TableRow>
-
-                <TableRow className='header_class'>
-                    <TableHeaderColumn className='header_class'>Cartório</TableHeaderColumn>
-                    <TableHeaderColumn className='header_class'>Cidade</TableHeaderColumn>
-                    <TableHeaderColumn className='header_class'>Estado</TableHeaderColumn>
-                </TableRow>
-
-            </TableHeader>
-            
-            <TableBody displayRowCheckbox={false}>
-                {body}
-            </TableBody> 
-                  </Table>
+                    <Table>
+                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                            <TableRow className='header_class'>
+                                <TableHeaderColumn className='header_class' colSpan="3" style={{ textAlign: 'center', backgroundColor: "#d0D0D0" }}>
+                                    {this.props.textheader}
+                                </TableHeaderColumn>
+                            </TableRow>   
+                            <TableRow className='header_class'>
+                                <TableHeaderColumn className='header_class' colSpan="3" style={{ textAlign: 'left' }}>
+                                    Cartório <br />
+                                    Cidade - Estado
+                                </TableHeaderColumn>
+                            </TableRow>              
+                        </TableHeader>                    
+                        <TableBody displayRowCheckbox={false}>
+                            {body}
+                        </TableBody> 
+                    </Table>
                 </Card>
             </div>
         )

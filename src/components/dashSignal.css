@@ -6,23 +6,31 @@ body {
 .root {
     width : 100%;
     margin: 0 auto;
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-direction: row; /* Safari 6.1+ */
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 99.7%; 
+    padding: 2px;
 }
 
 .tableCities {
     width : 24.7%;    
     margin: 0 auto;
-    padding-left : 1px;    
-    border: 1px solid rgb(224, 224, 224);
+    padding-left : 1px;     
 }
 
 .row_class {
-    height: 20px !important;    
+    height: 20px !important;   
+    padding-left: 5px !important;  
 }
 
 .header_class {
-    height: 30px !important;    
+    height: 30px !important;   
+    width: 100% !important;
+    line-height: 1.8 !important; 
+    padding-left: 5px !important; 
 }
 
 .super_header_class {
@@ -32,7 +40,7 @@ body {
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 1024px) {
     .tableCities {
-        width : 50%;
+        width : 49.5%;
     }
   }
   

@@ -55,7 +55,7 @@ class App extends Component {
 
   componentWillMount(){
     this.getData();
-    var intervalId = setInterval(this.getData, 10000);
+    var intervalId = setInterval(this.getData, 60000);
     this.setState({...this.state, intervalId : intervalId});
   }
 
@@ -82,10 +82,18 @@ class App extends Component {
         <div>        
           <Alert open={this.state.loading} />         
           <div className='root'>
-            <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
-            <CitiesList list={this.state.semResposta} textheader='Sem resposta'/>
-            <CitiesList list={this.state.inativos} textheader='Inativos'/>
-            <CitiesList list={this.state.falhasGuardian} textheader='Falhas Guardim'/> 
+            <div className='tableCities'>
+              <CitiesList  list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
+            </div>
+            <div className='tableCities'>
+              <CitiesList className='tableCities' list={this.state.semResposta} textheader='Sem resposta'/>
+            </div>
+            <div className='tableCities'>
+              <CitiesList className='tableCities' list={this.state.inativos} textheader='Inativos'/>
+            </div>
+            <div className='tableCities'>
+              <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Falhas Guardim'/> 
+            </div>
           </div>
         </div>
       </MuiThemeProvider>
