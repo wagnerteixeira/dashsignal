@@ -1,130 +1,181 @@
 import React, { Component } from 'react'
-import { 
-         Table, 
-         TableBody, 
-         TableHeader, 
-         TableHeaderColumn, 
-         TableRow, 
-         TableRowColumn, 
-    } from 'material-ui/Table';
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
 
 import { withStyles } from 'material-ui/styles';
-import { Paper, 
-         Typography, 
-         Grid, 
-         Card, 
-         CardHeader, 
-         CardContent, 
-         Avatar, 
-         List, 
-         ListItem, 
-         ListItemText, 
-         IconButton 
-    } from 'material-ui';
+import {
+    Paper,
+    Typography,
+    Grid,
+    Avatar,
+    List,
+    ListItem,
+    ListItemText,
+    IconButton
+} from 'material-ui';
+
+import {
+    Card,
+    CardActions,
+    CardHeader,
+    CardMedia,
+    CardTitle,
+    CardText
+} from 'material-ui/Card';
 
 const styles = () => ({
     root: {
-       padding: "50px 100px",
-       zIndex: 999,
-       position: "absolute"
-     },
-    
-    card: {
-       display: "flex",
-       height: "calc(100vh - 100px)"
-     },
-    
-     rightBorder: {
-       borderRight: "solid #d0D0D0 1px"
-     },
-    
-     content: {
-       marginTop: 0
-     },
-    
-    background: {
-       position: "absolute",
-       height: 200,
-       width: "100%",
-       top: 0,
-       background: "#7159C1"
-     },
-    
-     rightContainer: {
-       background:
-         "url(https://hdwallsource.com/img/2014/8/my-neighbor-totoro-wallpaper-27981-28703-hd-wallpapers.jpg) center center",
-       flex: 1
-     },
-    
-    heightAdjust: {
-       display: "flex",
-       flexDirection: "column"
-     },
-    
-     paper: {
-       background: "#9de1fe",
-       padding: 20
-     },
-    
-     information: {
-       color: "#444"
-     }
-   });
+        padding: "50px 100px",
+        zIndex: 999,
+        position: "absolute"
+    },
 
-  
+    card: {
+        display: "flex",
+        height: "calc(100vh - 100px)"
+    },
+
+    rightBorder: {
+        borderRight: "solid #d0D0D0 1px"
+    },
+
+    content: {
+        marginTop: 0
+    },
+
+    background: {
+        position: "absolute",
+        height: 200,
+        width: "100%",
+        top: 0,
+        background: "#7159C1"
+    },
+
+    rightContainer: {
+        background:
+            "url(https://hdwallsource.com/img/2014/8/my-neighbor-totoro-wallpaper-27981-28703-hd-wallpapers.jpg) center center",
+        flex: 1
+    },
+
+    heightAdjust: {
+        display: "flex",
+        flexDirection: "column"
+    },
+
+    paper: {
+        background: "#9de1fe",
+        padding: 20
+    },
+
+    information: {
+        color: "#444"
+    }
+});
+
+
 class DashSignaList extends Component {
     renderList() {
         let i = 0;
-        
+
         return this.props.list.map(obj => {
             i = i + 1;
             return (
-                
                 <TableRow className='row_class' key={i}>
-                    <Card>                    
-                        <TableRow className='row_class'>                        
-                            <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>{obj.Nome}</TableRowColumn>                        
+                    <Card className='noPadding'>
+
+                        {/*
+                        <CardHeader title='Cartório 1' avatar="images/jsa-128.jpg">
+                            <CardText> {obj.Nome} </CardText>
+                        </CardHeader>
+
+                        <CardMedia
+                            overlay={<CardTitle title='CARTÓRIO' subtitle="Overlay subtitle" />}
+                        >
+                        
+                            <img src="images/nature-600-337.jpg" alt="" />
                             
-                        </TableRow>
+
+                        </CardMedia>
+                        
+                        <CardTitle title='Cliente'>
+
+                        </CardTitle>
+                      
+                        <CardActions>
+                        </CardActions>
+                        */}
+
+                        <CardText className='cardRowClass'>
+                            {obj.Nome} <br />
+                            {obj.Cidade} - {obj.Uf}
+                        </CardText>
+
+                    </Card>
+                    {/*
+                    <Card>                        
                         <TableRow className='row_class'>
-                            <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>{obj.Cidade}  - {obj.Uf}</TableRowColumn>
-                            {/*<TableRowColumn className='row_class'>Estado: {obj.Uf}</TableRowColumn>*/}
+                            <TableRowColumn className='row_class' style={{ textAlign: 'left' }}>
+                                Cartório: {obj.Nome} <br />
+                                Cidade: {obj.Cidade} - UF: {obj.Uf}
+                            </TableRowColumn>                            
                         </TableRow>    
                     </Card>
+  */}
                 </TableRow>)
-                
-                
+
+
         });
     };
 
-    
+
     table() {
         let body = []
         if (this.props.list.length > 0) {
             body = this.renderList();
         }
 
-        return(
+        return (
             <div>
                 <Card>
                     <Table>
-                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                        <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
-                                <TableHeaderColumn className='header_class' colSpan="3" style={{ textAlign: 'center', backgroundColor: "#d0D0D0" }}>
+
+                                <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
                                     {this.props.textheader}
                                 </TableHeaderColumn>
-                            </TableRow>   
+
+                            </TableRow>
+
+                            <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#1E90DC', color: 'white' }}>                            
+                                Cartório <br />
+                                Cidade - Estado
+                            </TableHeaderColumn>
+
+
+
+                            {/*
                             <TableRow className='header_class'>
                                 <TableHeaderColumn className='header_class' colSpan="3" style={{ textAlign: 'left' }}>
                                     Cartório <br />
                                     Cidade - Estado
                                 </TableHeaderColumn>
-                            </TableRow>              
-                        </TableHeader>                    
+                            </TableRow>
+                            */}
+
+                        </TableHeader>
+
                         <TableBody displayRowCheckbox={false}>
                             {body}
-                        </TableBody> 
+                        </TableBody>
                     </Table>
+
                 </Card>
             </div>
         )

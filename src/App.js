@@ -83,16 +83,16 @@ class App extends Component {
           <Alert open={this.state.loading} />         
           <div className='root'>
             <div className='tableCities'>
-              <CitiesList  list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
+              <CitiesList  list={this.state.inativosPagam} textheader='INATIVOS QUE PAGAM'/>
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.semResposta} textheader='Sem resposta'/>
+              <CitiesList className='tableCities' list={this.state.semResposta} textheader='SEM RESPOSTA'/>
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.inativos} textheader='Inativos'/>
+              <CitiesList className='tableCities' list={this.state.inativos} textheader='INATIVOS'/>
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Falhas Guardim'/> 
+              <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='FALHAS GUARDIAM'/> 
             </div>
           </div>
         </div>

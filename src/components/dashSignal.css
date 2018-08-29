@@ -26,6 +26,18 @@ body {
     padding-left: 5px !important;  
 }
 
+.noPadding > div {
+    padding: 0px !important;
+}
+
+.cardRowClass {    
+    line-height: 1.8 !important; 
+    padding-top: 5px !important; 
+    padding-left: 7px !important; 
+    padding-right: 0px !important; 
+    padding-bottom: 0px !important; 
+}
+
 .header_class {
     height: 30px !important;   
     width: 100% !important;
