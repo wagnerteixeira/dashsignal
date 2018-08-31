@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import CitiesList from './components/citiesList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import './components/dashSignal.css'
+
 
 import DashSignal from './services/dashSgnalService';
 import Alert from './components/alert'
-
+import Cabecalho from './components/cabecalho';
+import Corpo from './components/corpo';
+import Rodape from './components/rodape';
 
 /*
  *<MuiThemeProvider>
@@ -34,33 +38,33 @@ import Alert from './components/alert'
           </div>        
         </MuiThemeProvider>
       </div>
-  */ 
+  */
 
-class App extends Component {  
-  
-  constructor(props){
+class App extends Component {
+
+  constructor(props) {
     super(props);
-    this.state = {loading: true, intervalId : 0, todosClientes : [],  inativosPagam : [], inativos: [], semResposta: [], falhasGuardian: []}
+    this.state = { loading: true, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [] }
     this.dashSignal = new DashSignal()
     this.getData = this.getData.bind(this)
   }
 
-  getData(){
-    this.setState({...this.state, loading : true});
-    this.dashSignal.getData().then((res)=> {
-      this.setState({...res, loading : false});
+  getData() {
+    this.setState({ ...this.state, loading: true });
+    this.dashSignal.getData().then((res) => {
+      this.setState({ ...res, loading: false });
       console.log(this.state)
     });
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getData();
     var intervalId = setInterval(this.getData, 60000);
-    this.setState({...this.state, intervalId : intervalId});
+    this.setState({ ...this.state, intervalId: intervalId });
   }
 
-  componentWillUnmount(){
-     //use intervalId from the state to clear the interval
+  componentWillUnmount() {
+    //use intervalId from the state to clear the interval
     clearInterval(this.state.intervalId);
   }
 
@@ -76,27 +80,28 @@ class App extends Component {
         </div>
       </MuiThemeProvider>*/
 
-  render() {    
-    return (     
-      <MuiThemeProvider> 
-        <div>        
-          <Alert open={this.state.loading} />         
+  render() {
+    return (
+      <MuiThemeProvider>
+        <div>
+          <Alert open={this.state.loading} />
           <div className='root'>
             <div className='tableCities'>
-              <CitiesList  list={this.state.inativosPagam} textheader='INATIVOS QUE PAGAM'/>
+              <CitiesList list={this.state.inativosPagam} textheader='INATIVOS QUE PAGAM' />
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.semResposta} textheader='SEM RESPOSTA'/>
+              <CitiesList className='tableCities' list={this.state.semResposta} textheader='SEM RESPOSTA' />
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.inativos} textheader='INATIVOS'/>
+              <CitiesList className='tableCities' list={this.state.inativos} textheader='INATIVOS' />
             </div>
             <div className='tableCities'>
-              <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='FALHAS GUARDIAM'/> 
+              <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='FALHAS GUARDIAM' />
             </div>
           </div>
         </div>
       </MuiThemeProvider>
+
     );
   }
 }
