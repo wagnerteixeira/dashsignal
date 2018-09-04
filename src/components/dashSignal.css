@@ -45,6 +45,11 @@ body {
     padding-left: 5px !important; 
 }
 
+.footer_class {
+    height: 30px !important;   
+    width: 100% !important;
+}
+
 .super_header_class {
     font-size: 1.0em !important; 
 }

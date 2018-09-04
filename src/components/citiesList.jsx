@@ -30,7 +30,7 @@ import {
     CardText
 } from 'material-ui/Card';
 
-import {yellow500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 import AlertWarning from  'material-ui/svg-icons/alert/warning'
 
 const styles = () => ({
@@ -88,10 +88,19 @@ class DashSignaList extends Component {
         super(props);
         this.state = {height: '500px'};
     }
+
+    handleResize = () => this.setState({
+        height: window.innerHeight + 'px',
+    });
     
     componentWillMount(){
         console.log(window.innerHeight)
         this.setState({height: window.innerHeight + 'px'});
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
     }
 
     renderList() {
@@ -162,13 +171,13 @@ class DashSignaList extends Component {
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 
-                                <TableHeaderColumn className='header_class super_header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
+                                <TableHeaderColumn className='header_class super_header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#444444', color: 'white' }}>
                                     {this.props.textheader}
                                 </TableHeaderColumn>
 
                             </TableRow>
 
-                            <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#1E90DC', color: 'white' }}>                            
+                            <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#767676', color: 'white' }}>                            
                                 Cartório <br />
                                 Cidade - Estado
                             </TableHeaderColumn>
@@ -191,9 +200,12 @@ class DashSignaList extends Component {
                         </TableBody>
 
                         <TableFooter adjustForCheckbox={false} displaySelectAll={false} style={{borderBottom: '1px solid white'}}>
-                            <TableRow className='header_class'>
-                                <TableRowColumn  className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white', padding : '0px' }}>                                    
-                                    Quantidade Registros - {this.props.list.length} &nbsp; {this.props.list.length > 0 &&<AlertWarning style={{  textAlign: 'left',}} color={yellow500} />}
+                            <TableRow className='footer_class'>
+                                <TableRowColumn  className='footer_class' colSpan='2' style={{ textAlign: 'left', backgroundColor: '#444444', padding:'0px', color: 'white'}}>                                    
+                        {this.props.list.length > 0 &&<AlertWarning style={{ width: 34, height: 34,}} color={red500} />}  
+                                </TableRowColumn>
+                                <TableRowColumn  className='footer_class'  style={{ textAlign: 'right', backgroundColor: '#444444', color: 'white', paddingBottom : '4px', paddingRight: '0px' }}>                                    
+                                     {this.props.list.length} &nbsp; 
                                 </TableRowColumn >
                             </TableRow>                            
                         </TableFooter>
