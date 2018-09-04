@@ -6,6 +6,7 @@ import {
     TableHeaderColumn,
     TableRow,
     TableRowColumn,
+    TableFooter
 } from 'material-ui/Table';
 
 import { withStyles } from 'material-ui/styles';
@@ -28,6 +29,9 @@ import {
     CardTitle,
     CardText
 } from 'material-ui/Card';
+
+import {yellow500} from 'material-ui/styles/colors';
+import AlertWarning from  'material-ui/svg-icons/alert/warning'
 
 const styles = () => ({
     root: {
@@ -143,11 +147,11 @@ class DashSignaList extends Component {
         return (
             <div>
                 <Card>
-                    <Table>
+                    <Table height={'calc(100vh - 85px - 38px)'}>
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 
-                                <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
+                                <TableHeaderColumn className='header_class super_header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
                                     {this.props.textheader}
                                 </TableHeaderColumn>
 
@@ -174,8 +178,26 @@ class DashSignaList extends Component {
                         <TableBody displayRowCheckbox={false}>
                             {body}
                         </TableBody>
-                    </Table>
 
+                        <TableFooter adjustForCheckbox={false} displaySelectAll={false} style={{borderBottom: '1px solid white'}}>
+                            <TableRow className='header_class'>
+                                <TableRowColumn  className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
+                                    <div className='footer'>                                        
+                                        <div style={{width: '60%', textAlign: 'right', marginTop: '5px' }}>
+                                            Quantidade Registros - {this.props.list.length}
+                                        </div>
+                                        <div style={{width: '3%'}}>
+                                        </div>
+                                        {this.props.list.length > 0 &&                                        
+                                        <div style={{width: '35%', marginTop: '3px', textAlign: 'left',}}>
+                                            <AlertWarning color={yellow500} />
+                                        </div> }
+                                    </div>
+                                </TableRowColumn >
+                            </TableRow>                            
+                        </TableFooter>
+                    </Table>
+    
                 </Card>
             </div>
         )

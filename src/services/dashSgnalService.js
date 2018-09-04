@@ -29,7 +29,7 @@ class DashSignal {
 
         var d = new Date();
 
-        var dateString =  d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
+        var dateString = '2018-09-03'// d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
         console.log(dateString)
 
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
@@ -74,7 +74,7 @@ class DashSignal {
         });
 
         semResposta.data.forEach(element => {
-            var cliente = dashSignal.todosClientes.filter(value => value.Cns === element)[0];
+            var cliente = dashSignal.todosClientes.filter(value => value.Cns === element.toUpperCase())[0];
             if (cliente  !== undefined){              
                 dashSignal.semResposta.push({Nome : cliente.Nome, Cidade : cliente.Cidade, Uf : cliente.Uf})                
             }
