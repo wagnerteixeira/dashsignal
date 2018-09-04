@@ -84,8 +84,19 @@ const styles = () => ({
 
 
 class DashSignaList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {height: '500px'};
+    }
+    
+    componentWillMount(){
+        console.log(window.innerHeight)
+        this.setState({height: window.innerHeight + 'px'});
+    }
+
     renderList() {
-        let i = 0;
+        let i = 0;        
+        
 
         return this.props.list.map(obj => {
             i = i + 1;
@@ -147,7 +158,7 @@ class DashSignaList extends Component {
         return (
             <div>
                 <Card>
-                    <Table height={'calc(100vh - 85px - 38px)'}>
+                    <Table height={`calc(${this.state.height} - 85px - 38px)`}>
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 
@@ -181,18 +192,8 @@ class DashSignaList extends Component {
 
                         <TableFooter adjustForCheckbox={false} displaySelectAll={false} style={{borderBottom: '1px solid white'}}>
                             <TableRow className='header_class'>
-                                <TableRowColumn  className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white' }}>
-                                    <div className='footer'>                                        
-                                        <div style={{width: '60%', textAlign: 'right', marginTop: '5px' }}>
-                                            Quantidade Registros - {this.props.list.length}
-                                        </div>
-                                        <div style={{width: '3%'}}>
-                                        </div>
-                                        {this.props.list.length > 0 &&                                        
-                                        <div style={{width: '35%', marginTop: '3px', textAlign: 'left',}}>
-                                            <AlertWarning color={yellow500} />
-                                        </div> }
-                                    </div>
+                                <TableRowColumn  className='header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#05385A', color: 'white', padding : '0px' }}>                                    
+                                    Quantidade Registros - {this.props.list.length} &nbsp; {this.props.list.length > 0 &&<AlertWarning style={{  textAlign: 'left',}} color={yellow500} />}
                                 </TableRowColumn >
                             </TableRow>                            
                         </TableFooter>

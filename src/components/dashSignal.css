@@ -56,8 +56,8 @@ body {
 }
 
 .footer{
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    flex-direction: row;*/
 }
 
 /* On screens that are 992px or less, set the background color to blue */

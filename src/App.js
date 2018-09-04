@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './components/dashSignal.css'
 
 
-import DashSignal from './services/dashSgnalService';
+import DashSignal from './services/dashSignalService';
 import Alert from './components/alert'
 import Cabecalho from './components/cabecalho';
 import Corpo from './components/corpo';
@@ -63,7 +63,7 @@ class App extends Component {
 
   componentWillMount() {
     this.getData();
-    var intervalId = setInterval(this.getData, 8000);
+    var intervalId = setInterval(this.getData, 60000);
     this.setState({ ...this.state, intervalId: intervalId });
   }
 

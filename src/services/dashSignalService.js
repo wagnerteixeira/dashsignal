@@ -29,7 +29,7 @@ class DashSignal {
 
         var d = new Date();
 
-        var dateString = '2018-09-03'// d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
+        var dateString = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
         console.log(dateString)
 
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
@@ -61,7 +61,15 @@ class DashSignal {
             }
         });
 
-        dashSignal.todosClientes = Array.from(new Set(ativosCns.data.concat(ativosPagaCns)));  
+        //dashSignal.todosClientes = Array.from(new Set(ativosCns.data.concat(ativosPagaCns)));  
+
+        ativosCns.data.forEach(element => {
+            dashSignal.todosClientes.push(element);
+        })
+
+        ativosPagaCns.data.forEach(element => {            
+            dashSignal.todosClientes.push(element)
+        })
 
         falhasGuardian.data.forEach(element => {
             var cliente = dashSignal.todosClientes.filter(value => value.Cns === element)[0];
