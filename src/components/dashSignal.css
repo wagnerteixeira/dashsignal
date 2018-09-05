@@ -64,6 +64,11 @@ body {
     padding-left: 0px !important; 
 }
 
+.super_footer_class {    
+    height: 20px !important;   
+    width: 100% !important;
+}
+
 .super_header_class {
     font-size: 1.0em !important; 
 }

@@ -166,7 +166,7 @@ class DashSignaList extends Component {
         return (
             <div>
                 <Card>
-                    <Table height={`calc(${this.state.height} - 85px - 38px - 38px)`}>
+                    <Table height={`calc(${this.state.height} - 85px - 38px - 21px)`}>
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 

@@ -31,7 +31,7 @@ class DashSignal {
 
         var dateString = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;       
         
-        dashSignal.ultimaAtualizacao = ("0" + (d.getHours())).slice(-2) + ':' + ("0" + (d.getMinutes())).slice(-2);
+        dashSignal.ultimaAtualizacao = ("0" + (d.getDate())).slice(-2) + "/" +  ("0" + ((d.getMonth()+1))).slice(-2) + "/" + d.getFullYear() + " " +   ("0" + (d.getHours())).slice(-2) + ':' + ("0" + (d.getMinutes())).slice(-2);
         
         
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
