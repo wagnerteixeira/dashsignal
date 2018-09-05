@@ -93,16 +93,16 @@ class App extends Component {
             : 
             (<div className='root'>               
               <div className='tableCities'>
-                <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam' />
+                <CitiesList list={this.state.inativosPagam} textheader='Clientes Não Conectados SignalR (Pagos)' />
               </div>
               <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.semResposta} textheader='Sem Resposta' />
+                <CitiesList className='tableCities' list={this.state.semResposta} textheader='Clientes com Falhas em Retorno' />
               </div>
               <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.inativos} textheader='Inativos' />
+                <CitiesList className='tableCities' list={this.state.inativos} textheader='Clientes Não Conectados SignalR (Geral)' />
               </div>
               <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Falhas Guardiam' />
+                <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Clientes com Falhas no Guardian' />
               </div>
             </div>)}
         </div>
