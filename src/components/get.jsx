@@ -66,16 +66,4 @@ class Get extends Component {
     }
 }
 
-export default Get
-
-
-
-<div className='footer'>
-                                        {this.props.list.length > 0 &&
-                                        <div style={{width: '20%'}}>
-                                            <AlertWarning color={yellow500} />
-                                        </div> }
-                                        <div style={{width: '80%'}}>
-                                            Qtde Registros - {this.props.list.length}
-                                        </div>
-                                    </div>
+export default Get;

@@ -4,7 +4,7 @@ import axios from 'axios'
 class DashSignal {
     async getData() {
         //                    ok                   ok                ok               ok                ok
-        let dashSignal = {todosClientes : [],  inativosPagam : [], inativos: [], semResposta: [], falhasGuardian: []}
+        let dashSignal = {todosClientes : [],  inativosPagam : [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: ''}
     
         const pAtivosCns = axios.get('http://cri.cartsys.com.br/workflow/api/cliente/selecionarativoscns', {
             auth: {
@@ -29,8 +29,11 @@ class DashSignal {
 
         var d = new Date();
 
-        var dateString = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;        
-
+        var dateString = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;       
+        
+        dashSignal.ultimaAtualizacao = ("0" + (d.getHours())).slice(-2) + ':' + ("0" + (d.getMinutes())).slice(-2);
+        
+        
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
             auth: {
                 username: '3C83483BC1171E8E96C12219DDE7EC634B551DCB',

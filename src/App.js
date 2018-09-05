@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import CitiesList from './components/citiesList'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import CitiesList from './components/citiesList';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import './components/dashSignal.css'
-
+import './components/dashSignal.css';
 
 import DashSignal from './services/dashSignalService';
-import Alert from './components/alert'
+import Alert from './components/alert';
 import Cabecalho from './components/cabecalho';
-import Corpo from './components/corpo';
 import Rodape from './components/rodape';
+
 
 /*
  *<MuiThemeProvider>
@@ -44,7 +43,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: '', fail : false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [] }
+    this.state = { loading: true, error: '', fail: false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '' }
     this.dashSignal = new DashSignal()
     this.getData = this.getData.bind(this)
   }
@@ -52,12 +51,12 @@ class App extends Component {
   getData() {
     this.setState({ ...this.state, loading: true });
     this.dashSignal.getData()
-    .then((res) => {
-      this.setState({...res, loading: false, fail: false});      
-    }).catch((e) => {
-      console.log(e)
-      this.setState({ ...this.state, loading: false, fail: true, error : e.message });
-  });
+      .then((res) => {
+        this.setState({ ...res, loading: false, fail: false });
+      }).catch((e) => {
+        console.log(e)
+        this.setState({ ...this.state, loading: false, fail: true, error: e.message });
+      });
   }
 
   componentWillMount() {
@@ -67,7 +66,6 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    //use intervalId from the state to clear the interval
     clearInterval(this.state.intervalId);
   }
 
@@ -84,14 +82,16 @@ class App extends Component {
       </MuiThemeProvider>*/
 
   render() {
-    return (      
+    return (
       <MuiThemeProvider>
         <div>
+
           <Alert open={this.state.loading} />
+
           {this.state.fail ? (
-            <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2> ) 
-            : 
-            (<div className='root'>               
+            <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>)
+            :
+            (<div className='root'>
               <div className='tableCities'>
                 <CitiesList list={this.state.inativosPagam} textheader='Clientes Não Conectados SignalR (Pagos)' />
               </div>
@@ -105,8 +105,11 @@ class App extends Component {
                 <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Clientes com Falhas no Guardian' />
               </div>
             </div>)}
+
+          <Rodape ultimaAtualizacao={this.state.ultimaAtualizacao} />
+
         </div>
-        
+
       </MuiThemeProvider>
 
     );
