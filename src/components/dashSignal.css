@@ -45,9 +45,23 @@ body {
     padding-left: 5px !important; 
 }
 
-.footer_class {
+.header_class_pequeno {
+    height: 10px !important;   
+    width: 100% !important;
+    line-height: 1.0 !important; 
+    padding-left: 0px !important; 
+}
+
+.footer_class {    
     height: 30px !important;   
     width: 100% !important;
+}
+
+.footer_class_pequeno {
+    height: 10px !important;   
+    width: 100% !important;
+    line-height: 0.0 !important; 
+    padding-left: 0px !important; 
 }
 
 .super_header_class {
