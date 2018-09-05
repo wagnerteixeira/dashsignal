@@ -93,8 +93,7 @@ class DashSignaList extends Component {
         height: window.innerHeight + 'px',
     });
     
-    componentWillMount(){
-        console.log(window.innerHeight)
+    componentWillMount(){        
         this.setState({height: window.innerHeight + 'px'});
         window.addEventListener('resize', this.handleResize)
     }

@@ -53,8 +53,7 @@ class App extends Component {
     this.setState({ ...this.state, loading: true });
     this.dashSignal.getData()
     .then((res) => {
-      this.setState({...res, loading: false, fail: false});
-      console.log(this.state)
+      this.setState({...res, loading: false, fail: false});      
     }).catch((e) => {
       console.log(e)
       this.setState({ ...this.state, loading: false, fail: true, error : e.message });
