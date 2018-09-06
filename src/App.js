@@ -41,8 +41,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
-
+        <div>        
           <Alert open={this.state.loading} />
 
           {this.state.fail ? (
