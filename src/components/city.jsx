@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-class City extends Component {    
+class City extends Component {
     render() {
         return (
             <div key={this.props.registry}>
@@ -12,4 +12,4 @@ class City extends Component {
     }
 }
 
-export default City
+export default City;

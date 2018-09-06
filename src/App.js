@@ -1,43 +1,12 @@
 import React, { Component } from 'react';
 import CitiesList from './components/citiesList';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import './components/dashSignal.css';
-
 import DashSignal from './services/dashSignalService';
 import Alert from './components/alert';
 import Cabecalho from './components/cabecalho';
 import Rodape from './components/rodape';
 
-
-/*
- *<MuiThemeProvider>
-          <CitiesList />
-        </MuiThemeProvider>
-
-        <div className='root'>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 1'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 2'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 3'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 4'/>
-          </div>        
-        </MuiThemeProvider>
-      </div>
-  */
 
 class App extends Component {
 
@@ -68,18 +37,6 @@ class App extends Component {
   componentWillUnmount() {
     clearInterval(this.state.intervalId);
   }
-
-  /*
-
-   <MuiThemeProvider>
-        <Alert open={this.state.loading} />        
-        <div className='root'>
-            <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
-            <CitiesList list={this.state.semResposta} textheader='Sem resposta'/>
-            <CitiesList list={this.state.inativos} textheader='Inativos'/>
-            <CitiesList list={this.state.falhasGuardian} textheader='Falhas Guardim'/>        
-        </div>
-      </MuiThemeProvider>*/
 
   render() {
     return (

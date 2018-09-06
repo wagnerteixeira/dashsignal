@@ -1,5 +1,5 @@
-import React from 'react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import React from 'react';
+import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 
 const TableExamplePagination = () => (
   <Table celled>
@@ -52,4 +52,4 @@ const TableExamplePagination = () => (
   </Table>
 )
 
-export default TableExamplePagination
+export default TableExamplePagination;

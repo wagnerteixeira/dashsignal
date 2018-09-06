@@ -1,11 +1,10 @@
-import axios from 'axios'
-
+import axios from 'axios';
 
 class DashSignal {
     async getData() {
         //                    ok                   ok                ok               ok                ok
-        let dashSignal = {todosClientes : [],  inativosPagam : [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: ''}
-    
+        let dashSignal = { todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '' }
+
         const pAtivosCns = axios.get('http://cri.cartsys.com.br/workflow/api/cliente/selecionarativoscns', {
             auth: {
                 username: '3C83483BC1171E8E96C12219DDE7EC634B551DCB',
@@ -29,11 +28,11 @@ class DashSignal {
 
         var d = new Date();
 
-        var dateString = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;       
-        
-        dashSignal.ultimaAtualizacao = ("0" + (d.getDate())).slice(-2) + "/" +  ("0" + ((d.getMonth()+1))).slice(-2) + "/" + d.getFullYear() + " " +   ("0" + (d.getHours())).slice(-2) + ':' + ("0" + (d.getMinutes())).slice(-2);
-        
-        
+        var dateString = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+
+        dashSignal.ultimaAtualizacao = ("0" + (d.getDate())).slice(-2) + "/" + ("0" + ((d.getMonth() + 1))).slice(-2) + "/" + d.getFullYear() + " " + ("0" + (d.getHours())).slice(-2) + ':' + ("0" + (d.getMinutes())).slice(-2);
+
+
         const pFalhasGuardian = axios.get(`http://cri.cartsys.com.br/monitor/api/logguardian/selecionarpordata/${dateString}`, {
             auth: {
                 username: '3C83483BC1171E8E96C12219DDE7EC634B551DCB',
@@ -49,17 +48,17 @@ class DashSignal {
         });
 
         //const [res2, AtivosPagaCns, AtivosCns] = await Promise.all([t, pAtivosPagaCns, pAtivosCns]);
-        const [ativosCns, ativosPagaCns, ativos, falhasGuardian, semResposta] = await Promise.all([pAtivosCns, pAtivosPagaCns, pAtivos, pFalhasGuardian, pSemResposta]);                         
+        const [ativosCns, ativosPagaCns, ativos, falhasGuardian, semResposta] = await Promise.all([pAtivosCns, pAtivosPagaCns, pAtivos, pFalhasGuardian, pSemResposta]);
 
-        ativosPagaCns.data.forEach(element => {            
-            if (ativos.data.filter(value => value === element.Cns).length === 0){
-                dashSignal.inativosPagam.push({Nome : element.Nome, Cidade : element.Cidade, Uf : element.Uf})
+        ativosPagaCns.data.forEach(element => {
+            if (ativos.data.filter(value => value === element.Cns).length === 0) {
+                dashSignal.inativosPagam.push({ Nome: element.Nome, Cidade: element.Cidade, Uf: element.Uf })
             }
         });
 
-        ativosCns.data.forEach(element => {                        
-            if (ativos.data.filter(value => value === element.Cns).length === 0){              
-                dashSignal.inativos.push({Nome : element.Nome, Cidade : element.Cidade, Uf : element.Uf})                
+        ativosCns.data.forEach(element => {
+            if (ativos.data.filter(value => value === element.Cns).length === 0) {
+                dashSignal.inativos.push({ Nome: element.Nome, Cidade: element.Cidade, Uf: element.Uf })
             }
         });
 
@@ -69,27 +68,27 @@ class DashSignal {
             dashSignal.todosClientes.push(element);
         })
 
-        ativosPagaCns.data.forEach(element => {            
+        ativosPagaCns.data.forEach(element => {
             dashSignal.todosClientes.push(element)
         })
 
         falhasGuardian.data.forEach(element => {
             var cliente = dashSignal.todosClientes.filter(value => value.Cns === element)[0];
-            if (cliente  !== undefined){              
-                dashSignal.falhasGuardian.push({Nome : cliente.Nome, Cidade : cliente.Cidade, Uf : cliente.Uf})                
+            if (cliente !== undefined) {
+                dashSignal.falhasGuardian.push({ Nome: cliente.Nome, Cidade: cliente.Cidade, Uf: cliente.Uf })
             }
             else {
-                dashSignal.falhasGuardian.push({Nome : element, Cidade : '', Uf : ''})                
+                dashSignal.falhasGuardian.push({ Nome: element, Cidade: '', Uf: '' })
             }
         });
 
         semResposta.data.forEach(element => {
             var cliente = dashSignal.todosClientes.filter(value => value.Cns === element.toUpperCase())[0];
-            if (cliente  !== undefined){              
-                dashSignal.semResposta.push({Nome : cliente.Nome, Cidade : cliente.Cidade, Uf : cliente.Uf})                
+            if (cliente !== undefined) {
+                dashSignal.semResposta.push({ Nome: cliente.Nome, Cidade: cliente.Cidade, Uf: cliente.Uf })
             }
             else {
-                dashSignal.semResposta.push({Nome : element, Cidade : '', Uf : ''})                
+                dashSignal.semResposta.push({ Nome: element, Cidade: '', Uf: '' })
             }
         });
 
@@ -97,7 +96,5 @@ class DashSignal {
 
     }
 }
-
-
 
 export default DashSignal;
