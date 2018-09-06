@@ -105,17 +105,17 @@ class DashSignaList extends Component {
         return (
             <div>
                 <Card>
-                    <Table height={`calc(${this.state.height} - 85px - 38px - 30px)`}>
+                    <Table height={`calc(${this.state.height} - 85px - 38px - 30px - 38px)`}>
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 
-                                <TableHeaderColumn className='header_class super_header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#444444', color: 'white' }}>
+                                <TableHeaderColumn className='header_class super_header_class' colSpan='3' style={{ textAlign: 'center', backgroundColor: '#0174DF', color: 'white' }}>
                                     {this.props.textheader}
                                 </TableHeaderColumn>
 
                             </TableRow>
 
-                            <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#767676', color: 'white' }}>
+                            <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#0080FF', color: 'white' }}>
                                 <span style={{ fontWeight: 500, fontSize: '1.2em' }}>Cartório</span> <br />
                                 <span style={{ fontSize: '1.2em' }}>Cidade - Estado</span>
                             </TableHeaderColumn>
@@ -128,11 +128,11 @@ class DashSignaList extends Component {
 
                         <TableFooter adjustForCheckbox={false} displaySelectAll={false} style={{ borderBottom: '1px solid white' }}>
                             <TableRow className='footer_class'>
-                                <TableRowColumn className='footer_class' colSpan='2' style={{ textAlign: 'left', backgroundColor: '#444444', padding: '0px', color: 'white' }}>
-                                    {this.props.list.length > 0 && <AlertWarning style={{ width: 34, height: 34, }} color={red500} />}
+                                <TableRowColumn className='footer_class' colSpan='2' style={{ textAlign: 'left', backgroundColor: '#0174DF', padding: '0px', color: 'white' }}>
+                                    &nbsp; {this.props.list.length > 0 && <AlertWarning style={{ width: 24, height: 24, color: 'red' }} />}
                                 </TableRowColumn>
-                                <TableRowColumn className='footer_class' style={{ textAlign: 'right', backgroundColor: '#444444', color: 'white', paddingBottom: '4px', paddingRight: '0px' }}>
-                                    {this.props.list.length} &nbsp;
+                                <TableRowColumn className='footer_class' style={{ textAlign: 'right', backgroundColor: '#0174DF', color: 'white', paddingBottom: '4px', paddingRight: '0px' }}>
+                                    Total de Registros: {this.props.list.length} &nbsp;
                                 </TableRowColumn >
                             </TableRow>
                         </TableFooter>
@@ -140,7 +140,7 @@ class DashSignaList extends Component {
 
                 </Card>
             </div>
-        )       
+        )
     }
 
     render() {

@@ -3,17 +3,19 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 
 class Cabecalho extends Component {
     render() {
-        return (<Table >
-            <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                <TableRow className='header_class_pequeno'>
-    
-                    <TableHeaderColumn className='header_class_pequeno' colSpan="3" style={{ textAlign: 'center', backgroundColor: '#2E64FE', color: 'white' }}>
-                        <h1>DASHBOARD SIGNAL - CARTSYS SOFTWARE</h1>
-                    </TableHeaderColumn>
-                    
-                </TableRow>
-            </TableHeader>
-        </Table>)
+        return (
+            <Table >
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                    <TableRow className='header_class super_header_class'>
+
+                        <TableHeaderColumn className='header_class super_header_class' colSpan="3" style={{ textAlign: 'center', padding: '0px', backgroundColor: '#084B8A', color: 'white' }}>
+                            DASHBOARD SIGNAL - CARTSYS SOFTWARE
+                        </TableHeaderColumn>
+
+                    </TableRow>
+                </TableHeader>
+            </Table >
+        )
     }
 }
 

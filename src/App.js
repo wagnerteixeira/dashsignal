@@ -41,9 +41,11 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div>        
+        <div>
           <Alert open={this.state.loading} />
 
+          <Cabecalho />
+          
           {this.state.fail ? (
             <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>)
             :

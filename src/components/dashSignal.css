@@ -67,13 +67,12 @@ body {
 
 .super_footer_class {    
     height: 20px !important;   
-    width: 100% !important;
+    width: 100% !important;    
 }
 
 .super_header_class {
     font-size: 1.1em !important; 
 }
-
 
 .content-wrapper {
     width:100px;
