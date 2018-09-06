@@ -15,6 +15,15 @@ body {
     padding: 2px;
 }
 
+.logoCabecalho {
+    background-image: url('https://hdwallsource.com/img/2014/8/my-neighbor-totoro-wallpaper-27981-28703-hd-wallpapers.jpg');
+    width: 50px;/* Faz a largura ficar igual a da largura da imagem de exemplo */
+    height: 50px;/* Faz a altura ficar igual a da altura da imagem de exemplo */
+
+    background-position: top left;
+    padding-left: 10px;
+    }
+
 .tableCities {
     width : 24.7%;    
     margin: 0 auto;

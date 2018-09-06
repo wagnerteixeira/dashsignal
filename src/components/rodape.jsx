@@ -14,8 +14,8 @@ class Rodape extends Component {
                             &nbsp; Última atualização: {this.props.ultimaAtualizacao}
                         </TableHeaderColumn>
 
-                        <TableHeaderColumn className='super_footer_class' colSpan="3" style={{ textAlign: 'right', paddingRight: '5px', backgroundColor: '#084B8A', color: 'white' }}>                            
-                            cartsys.com.br‎ - Copyright Cartsys Software 2018 ©
+                        <TableHeaderColumn className='super_footer_class' colSpan="3" style={{ textAlign: 'right', paddingRight: '5px', backgroundColor: '#084B8A', color: 'white' }}>
+                            <a target='_blank' href='http://www.cartsys.com.br' style={{ color: 'white' }}>cartsys.com.br‎</a> - Copyright Cartsys Software 2018 ©
                         </TableHeaderColumn>
 
                     </TableRow>
