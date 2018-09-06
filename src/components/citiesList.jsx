@@ -135,8 +135,8 @@ class DashSignaList extends Component {
                         */}
 
                         <CardText className='cardRowClass'>
-                            {obj.Nome} <br />
-                            {obj.Cidade} - {obj.Uf}
+                            <span style={{fontWeight: 500}}>{obj.Nome}</span> <br />
+                            <span>{obj.Cidade} - {obj.Uf}</span>
                         </CardText>
 
                     </Card>
@@ -166,7 +166,7 @@ class DashSignaList extends Component {
         return (
             <div>
                 <Card>
-                    <Table height={`calc(${this.state.height} - 85px - 38px - 21px)`}>
+                    <Table height={`calc(${this.state.height} - 85px - 38px - 30px)`}>
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
                             <TableRow className='header_class'>
 
@@ -177,8 +177,8 @@ class DashSignaList extends Component {
                             </TableRow>
 
                             <TableHeaderColumn className='header_class' colSpan='3' style={{ textAlign: 'left', backgroundColor: '#767676', color: 'white' }}>                            
-                                Cartório <br />
-                                Cidade - Estado
+                                <span style={{fontWeight: 500, fontSize: '1.2em'}}>Cartório</span> <br />
+                                <span style={{fontSize: '1.2em'}}>Cidade - Estado</span>
                             </TableHeaderColumn>
 
 

@@ -19,7 +19,7 @@ body {
     width : 24.7%;    
     margin: 0 auto;
     padding-left : 1px;    
-    font-weight: 500;  
+   /* font-weight: 500; */
 }
 
 .row_class {
@@ -71,8 +71,9 @@ body {
 }
 
 .super_header_class {
-    font-size: 1.0em !important; 
+    font-size: 1.1em !important; 
 }
+
 
 .content-wrapper {
     width:100px;
