@@ -6,7 +6,6 @@ import './components/dashSignal.css';
 
 import DashSignal from './services/dashSignalService';
 import Alert from './components/alert';
-import Cabecalho from './components/cabecalho';
 import Rodape from './components/rodape';
 
 
@@ -67,19 +66,7 @@ class App extends Component {
 
   componentWillUnmount() {
     clearInterval(this.state.intervalId);
-  }
-
-  /*
-
-   <MuiThemeProvider>
-        <Alert open={this.state.loading} />        
-        <div className='root'>
-            <CitiesList list={this.state.inativosPagam} textheader='Inativos que Pagam'/>
-            <CitiesList list={this.state.semResposta} textheader='Sem resposta'/>
-            <CitiesList list={this.state.inativos} textheader='Inativos'/>
-            <CitiesList list={this.state.falhasGuardian} textheader='Falhas Guardim'/>        
-        </div>
-      </MuiThemeProvider>*/
+  } 
 
   render() {
     return (
