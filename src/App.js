@@ -7,6 +7,7 @@ import './components/dashSignal.css';
 import DashSignal from './services/dashSignalService';
 import Alert from './components/alert';
 import Rodape from './components/rodape';
+import SignalInativo from './components/signalInativo'
 
 
 /*
@@ -42,7 +43,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: '', fail: false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '' }
+    this.state = { loading: true, error: '', fail: false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '', signalAtivo : true }
     this.dashSignal = new DashSignal()
     this.getData = this.getData.bind(this)
   }
@@ -68,33 +69,38 @@ class App extends Component {
     clearInterval(this.state.intervalId);
   } 
 
+  getShowData(){
+    if (!this.state.signalAtivo){
+      return <SignalInativo />
+    }
+    else if (this.state.fail){
+      return <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>
+    }     
+    else {
+      return (<div className='root'>
+        <div className='tableCities'>
+          <CitiesList list={this.state.inativosPagam} textheader='Clientes Não Conectados SignalR (Pagos)' />
+        </div>
+        <div className='tableCities'>
+          <CitiesList className='tableCities' list={this.state.semResposta} textheader='Clientes com Falhas em Retorno' />
+        </div>
+        <div className='tableCities'>
+          <CitiesList className='tableCities' list={this.state.inativos} textheader='Clientes Não Conectados SignalR (Geral)' />
+        </div>
+        <div className='tableCities'>
+          <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Clientes com Falhas no Guardian' />
+        </div>
+        <Rodape ultimaAtualizacao={this.state.ultimaAtualizacao} />
+      </div>)
+    }
+  }
+
   render() {
     return (
       <MuiThemeProvider>
         <div>
-
           <Alert open={this.state.loading} />
-
-          {this.state.fail ? (
-            <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>)
-            :
-            (<div className='root'>
-              <div className='tableCities'>
-                <CitiesList list={this.state.inativosPagam} textheader='Clientes Não Conectados SignalR (Pagos)' />
-              </div>
-              <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.semResposta} textheader='Clientes com Falhas em Retorno' />
-              </div>
-              <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.inativos} textheader='Clientes Não Conectados SignalR (Geral)' />
-              </div>
-              <div className='tableCities'>
-                <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Clientes com Falhas no Guardian' />
-              </div>
-            </div>)}
-
-          <Rodape ultimaAtualizacao={this.state.ultimaAtualizacao} />
-
+          {this.getShowData()}
         </div>
 
       </MuiThemeProvider>
