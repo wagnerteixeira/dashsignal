@@ -14,7 +14,7 @@ import {
     CardText
 } from 'material-ui/Card';
 
-import {red500} from 'material-ui/styles/colors';
+import {red500 as red} from 'material-ui/styles/colors';
 import AlertWarning from  'material-ui/svg-icons/alert/warning'
 
 class DashSignaList extends Component {
@@ -37,9 +37,19 @@ class DashSignaList extends Component {
     }
 
     renderList() {
-        let i = 0;        
-        
+        return Object.keys(this.props.list).map(key => {            
+            return (
+                <TableRow className='row_class' key={key}>
+                    <Card className='noPadding'>
+                        <CardText className='cardRowClass'>
+                            <span style={{fontWeight: 500}}>{this.props.list[key].Nome}</span> <br />
+                            <span>{this.props.list[key].Cidade} - {this.props.list[key].Uf}</span>
+                        </CardText>
 
+                    </Card>
+                </TableRow>)
+        });
+        /*let i = 0;   
         return this.props.list.map(obj => {
             i = i + 1;
             return (
@@ -52,9 +62,7 @@ class DashSignaList extends Component {
 
                     </Card>
                 </TableRow>)
-
-
-        });
+        });*/
     };
 
     render() {
@@ -89,7 +97,7 @@ class DashSignaList extends Component {
                         <TableFooter adjustForCheckbox={false} displaySelectAll={false} style={{borderBottom: '1px solid white'}}>
                             <TableRow className='footer_class'>
                                 <TableRowColumn  className='footer_class' colSpan='2' style={{ textAlign: 'left', backgroundColor: '#444444', padding:'0px', color: 'white'}}>                                    
-                        {this.props.list.length > 0 &&<AlertWarning style={{ width: 34, height: 34,}} color={red500} />}  
+                        {this.props.list.length > 0 &&<AlertWarning style={{ width: 34, height: 34,}} color={red} />}  
                                 </TableRowColumn>
                                 <TableRowColumn  className='footer_class'  style={{ textAlign: 'right', backgroundColor: '#444444', color: 'white', paddingBottom : '4px', paddingRight: '0px' }}>                                    
                                      {this.props.list.length} &nbsp; 

@@ -4,59 +4,66 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './components/dashSignal.css';
 
-import DashSignal from './services/dashSignalService';
-import Alert from './components/alert';
+import * as dashSignalServices from './services/dashSignalService';
 import Rodape from './components/rodape';
 import SignalInativo from './components/signalInativo'
-
-
-/*
- *<MuiThemeProvider>
-          <CitiesList />
-        </MuiThemeProvider>
-
-        <div className='root'>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 1'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 2'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 3'/>
-          </div>        
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div className='tableCities'>
-            <CitiesList list={list} textheader='Grid 4'/>
-          </div>        
-        </MuiThemeProvider>
-      </div>
-  */
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: '', fail: false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '', signalAtivo : true }
-    this.dashSignal = new DashSignal()
-    this.getData = this.getData.bind(this)
+    this.state = { loading: false, error: '', fail: false, intervalId: 0, todosClientes: [], inativosPagam: [], inativos: [], semResposta: [], falhasGuardian: [], ultimaAtualizacao: '', signalAtivo : true }
+    this.getData = this.getData.bind(this)    
   }
 
-  getData() {
-    this.setState({ ...this.state, loading: true });
-    this.dashSignal.getData()
+  getData() {    
+    const date = new Date();
+    const currentDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+    const ultimaAtualizacao = ("0" + (date.getDate())).slice(-2) + "/" +  ("0" + ((date.getMonth()+1))).slice(-2) + "/" + date.getFullYear() + " " +   ("0" + (date.getHours())).slice(-2) + ':' + ("0" + (date.getMinutes())).slice(-2);
+    
+    this.setState({ ...this.state, fail: false, loading: false });
+    dashSignalServices.doVerificaSignalAtivo()
+      .then((res) => {
+        if (!res.data)
+          this.setState({...this.state, signalAtivo : false})
+      })
+
+    dashSignalServices.doGetFalhasGuardian(currentDate)
+      .then((res) => this.setState({...this.state, falhasGuardian : res.data}))
+      .catch((e) => {
+        console.log(e)
+        this.setState({ ...this.state, loading: false, fail: true, error: e.message });
+      });
+
+    dashSignalServices.doGetFalhasRetorno(currentDate)
+      .then((res) => this.setState({...this.state, semResposta : res.data}))
+      .catch((e) => {
+        console.log(e)
+        this.setState({ ...this.state, loading: false, fail: true, error: e.message });
+      });
+
+    dashSignalServices.doGetNaoConectadosGeral()
+      .then((res) => this.setState({...this.state, inativos : res.data, ultimaAtualizacao : ultimaAtualizacao}))
+      .catch((e) => {
+        console.log(e)
+        this.setState({ ...this.state, loading: false, fail: true, error: e.message });
+      });
+
+    dashSignalServices.doGetNaoConectadosPagos()
+      .then((res) => this.setState({...this.state, inativosPagam : res.data}))
+      .catch((e) => {
+        console.log(e)
+        this.setState({ ...this.state, loading: false, fail: true, error: e.message });
+      });
+
+    /*this.dashSignal.getData()
       .then((res) => {
         this.setState({ ...res, loading: false, fail: false });
       }).catch((e) => {
         console.log(e)
         this.setState({ ...this.state, loading: false, fail: true, error: e.message });
       });
+    */
   }
 
   componentWillMount() {
@@ -67,40 +74,33 @@ class App extends Component {
 
   componentWillUnmount() {
     clearInterval(this.state.intervalId);
-  } 
-
-  getShowData(){
-    if (!this.state.signalAtivo){
-      return <SignalInativo />
-    }
-    else if (this.state.fail){
-      return <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>
-    }     
-    else {
-      return (<div className='root'>
-        <div className='tableCities'>
-          <CitiesList list={this.state.inativosPagam} textheader='Clientes Não Conectados SignalR (Pagos)' />
-        </div>
-        <div className='tableCities'>
-          <CitiesList className='tableCities' list={this.state.semResposta} textheader='Clientes com Falhas em Retorno' />
-        </div>
-        <div className='tableCities'>
-          <CitiesList className='tableCities' list={this.state.inativos} textheader='Clientes Não Conectados SignalR (Geral)' />
-        </div>
-        <div className='tableCities'>
-          <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Clientes com Falhas no Guardian' />
-        </div>
-        <Rodape ultimaAtualizacao={this.state.ultimaAtualizacao} />
-      </div>)
-    }
-  }
+  }   
 
   render() {
     return (
       <MuiThemeProvider>
-        <div>
-          <Alert open={this.state.loading} />
-          {this.getShowData()}
+        <div>                    
+          {this.state.signalAtivo && !this.state.fail && 
+            <div className='root'>
+              <div className='tableCities'>
+                <CitiesList list={this.state.inativosPagam} textheader='Não Conectados SignalR (Pagos)' />
+              </div>
+              <div className='tableCities'>
+                <CitiesList className='tableCities' list={this.state.semResposta} textheader='Falhas em Retorno' />
+              </div>
+              <div className='tableCities'>
+                <CitiesList className='tableCities' list={this.state.inativos} textheader='Não Conectados SignalR (Geral)' />
+              </div>
+              <div className='tableCities'>
+                <CitiesList className='tableCities' list={this.state.falhasGuardian} textheader='Falhas no Guardian' />
+              </div>               
+            </div>}
+
+          {this.state.fail && <h2>Erro ao buscar informações, verifique se há conexão de internet e o servidor está ativo. <br /> {this.state.error}</h2>}
+
+          {!this.state.signalAtivo && <SignalInativo />}
+
+          {this.state.signalAtivo && !this.state.fail && <Rodape ultimaAtualizacao={this.state.ultimaAtualizacao} />}
         </div>
 
       </MuiThemeProvider>

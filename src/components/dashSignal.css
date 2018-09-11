@@ -81,11 +81,6 @@ body {
     margin:0 auto;
 }
 
-.footer{
-    /*display: flex;
-    flex-direction: row;*/
-}
-
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 1024px) {
     .tableCities {
